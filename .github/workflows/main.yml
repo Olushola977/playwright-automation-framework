@@ -39,10 +39,10 @@ jobs:
           git config --global user.email 'adeyeyeolushola977@gmail.com'
           git checkout -b report-branch
           rm -rf .gitignore
-          mv test-results/reports/* .  # Adjust path if necessary
+          mv test-results/* .  # Adjust path if necessary
           # rm -rf test-results/reports - Cleanup the directory
           touch .nojekyll  # Prevent GitHub Pages from processing files
-          git add .
+          git add test-results
           git commit -m 'Deploy Playwright report'
           git push origin report-branch --force
         env:
