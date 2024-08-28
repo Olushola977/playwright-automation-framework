@@ -37,13 +37,15 @@ jobs:
         run: |
           git config --global user.name 'Adeyeye Olushola'
           git config --global user.email 'adeyeyeolushola977@gmail.com'
-          git checkout -b report-branch
-          rm -rf .gitignore
-          mv test-results/* .  # Adjust path if necessary
-          # rm -rf test-results/reports - Cleanup the directory
-          touch .nojekyll  # Prevent GitHub Pages from processing files
-          git add test-results
-          git commit -m 'Deploy Playwright report'
+          git fetch origin
+          git checkout --orphan report-branch  # Create a new branch without history
+          git reset --hard  # Remove all files from the new branch
+          git clean -fdx  # Ensure the working directory is clean
+          mv test-results/* .  # Move the contents of test-results to the root
+          rm -rf test-results  # Remove the empty test-results folder
+          touch .nojekyll  # Optional: Prevent GitHub Pages from processing files
+          git add .
+          git commit -m 'Deploy test-results to new branch'
           git push origin report-branch --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
