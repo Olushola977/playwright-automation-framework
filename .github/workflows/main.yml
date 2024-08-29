@@ -39,10 +39,11 @@ jobs:
           git config --global user.email 'adeyeyeolushola977@gmail.com'
           git fetch origin
           git checkout --orphan report-branch  # Create a new branch without history
-          git reset --hard  # Remove all files from the new branch
-          git clean -fdx  # Ensure the working directory is clean
           mv test-results/* .  # Move the contents of test-results to the root
-          rm -rf test-results  # Remove the empty test-results folder
+          # git reset --hard  # Remove all files from the new branch
+          # git clean -fdx  # Ensure the working directory is clean
+          
+          # rm -rf test-results  # Remove the empty test-results folder
           touch .nojekyll  # Optional: Prevent GitHub Pages from processing files
           git add .
           git commit -m 'Deploy test-results to new branch'
