@@ -38,12 +38,13 @@ jobs:
           git config --global user.name 'Adeyeye Olushola'
           git config --global user.email 'adeyeyeolushola977@gmail.com'
 
-          git checkout main
           # git fetch origin
-          git checkout --orphan report-branch -- test-results # Create a new branch without history
+          git checkout report-branch # Create a new branch without history
+
+          git checkout main -- test-results
 
           git add test-results
-          git clean -fdx  # Ensure the working directory is clean
+
           git commit -m 'Deploy test-results to new branch'
           git push origin report-branch --force
         env:
