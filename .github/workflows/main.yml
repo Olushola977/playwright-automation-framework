@@ -38,7 +38,7 @@ jobs:
           git config --global user.name 'Adeyeye Olushola'
           git config --global user.email 'adeyeyeolushola977@gmail.com'
           git fetch origin
-          git checkout --orphan report-branch -- test-results # Create a new branch without history
+          git checkout --orphan report-branch # Create a new branch without history
           # mv test-results/* .  # Move the contents of test-results to the root
           # git reset --hard  # Remove all files from the new branch
           # git clean -fdx  # Ensure the working directory is clean
