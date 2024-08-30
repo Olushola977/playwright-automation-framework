@@ -39,7 +39,7 @@ jobs:
           git config --global user.email 'adeyeyeolushola977@gmail.com'
 
           # git fetch origin
-          git checkout report-branch # Create a new branch without history
+          git checkout -b report-branch # Create a new branch without history
 
           git checkout main -- test-results
 
