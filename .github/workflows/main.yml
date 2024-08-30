@@ -32,28 +32,21 @@ jobs:
           path: test-results/reports/
           retention-days: 30
           
-      - name: Checkout the main branch
-        uses: actions/checkout@v3
-        with:
-          ref: main
-
-      - name: Configure Git
+      - name: Deploy Playwright report to GitHub Pages
+        if: ${{ !cancelled() }} # Optional: to only run if the job wasn't cancelled
         run: |
-          git config --global user.name "Adeyeye Olushola"
-          git config --global user.email "adeyeyeolushola977@gmail.com"
-
-      - name: Create new branch
-        run: |
-          git checkout -b report-branch
-
-      - name: Copy folder to new branch
-        run: |
+          git config --global user.name 'Adeyeye Olushola'
+          git config --global user.email 'adeyeyeolushola977@gmail.com'
           git fetch origin
+          git checkout --orphan report-branch -- test-results # Create a new branch without history
+          # mv test-results/* .  # Move the contents of test-results to the root
+          # git reset --hard  # Remove all files from the new branch
+          # git clean -fdx  # Ensure the working directory is clean
+          
+          # rm -rf test-results  # Remove the empty test-results folder
+          # touch .nojekyll  # Optional: Prevent GitHub Pages from processing files
           git add .
-          git commit -m "Add folder from main branch"
-
-      - name: Push to new branch
+          git commit -m 'Deploy test-results to new branch'
+          git push origin report-branch --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git push origin new-branch-name
