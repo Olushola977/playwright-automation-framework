@@ -45,7 +45,7 @@ jobs:
           
           # rm -rf test-results  # Remove the empty test-results folder
           # touch .nojekyll  # Optional: Prevent GitHub Pages from processing files
-          git add .
+          git add test-results
           git commit -m 'Deploy test-results to new branch'
           git push origin report-branch --force
         env:
