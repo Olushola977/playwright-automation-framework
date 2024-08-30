@@ -39,7 +39,7 @@ jobs:
           git config --global user.email 'adeyeyeolushola977@gmail.com'
 
           git status
-          git add test-results/
+          git add -A
           git commit -m "add test result"
 
           git status
