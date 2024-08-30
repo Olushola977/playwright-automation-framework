@@ -38,6 +38,12 @@ jobs:
           git config --global user.name 'Adeyeye Olushola'
           git config --global user.email 'adeyeyeolushola977@gmail.com'
 
+          git status
+          git add .
+          git commit -m "add test result"
+
+          git status
+
           # git fetch origin
           git checkout -b report-branch # Create a new branch without history
 
