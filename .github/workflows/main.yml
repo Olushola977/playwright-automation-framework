@@ -31,19 +31,3 @@ jobs:
           name: playwright-report
           path: test-results/reports/
           retention-days: 30
-      
-      - name: Deploy Playwright report to GitHub Pages
-        if: ${{ !cancelled() }} # Optional: to only run if the job wasn't cancelled
-        run: |
-          git config --global user.name 'Adeyeye Olushola'
-          git config --global user.email 'adeyeyeolushola977@gmail.com'
-          
-          git checkout -b report-branch  # Create a new branch
-          
-          cp -R test-artifacts/* .
-          git add .
-          git commit -m "Add test artifact"
-          
-          git push origin report-branch --force
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
