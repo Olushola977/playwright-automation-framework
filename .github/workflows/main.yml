@@ -37,8 +37,10 @@ jobs:
         run: |
           git config --global user.name 'Adeyeye Olushola'
           git config --global user.email 'adeyeyeolushola977@gmail.com'
-          git fetch origin
-          git checkout --orphan report-branch # Create a new branch without history
+
+          git checkout main
+          # git fetch origin
+          git checkout --orphan report-branch -- test-results # Create a new branch without history
 
           git add test-results
           git clean -fdx  # Ensure the working directory is clean
