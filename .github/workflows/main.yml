@@ -48,7 +48,7 @@ jobs:
 
       - name: Copy folder to new branch
         run: |
-          git fetch main
+          git fetch origin
           git add .
           git commit -m "Add folder from main branch"
 
