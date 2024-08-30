@@ -41,7 +41,7 @@ jobs:
           # git fetch origin
           git checkout -b report-branch # Create a new branch without history
 
-          git checkout main -- test-results
+          git checkout main -- test-results/
 
           git add test-results
 
