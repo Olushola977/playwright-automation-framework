@@ -40,9 +40,9 @@ jobs:
           
           git checkout -b report-branch  # Create a new branch
           
-          git checkout main test-results
-          git add test-results
-          git commit -m "Add folder from main branch"
+          cp -R test-artifacts/* .
+          git add .
+          git commit -m "Add test artifact"
           
           git push origin report-branch --force
         env:
