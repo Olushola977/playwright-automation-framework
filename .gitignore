@@ -8,3 +8,4 @@ node_modules/
 /credentials.json
 /reports/
 .DS_Store
+/lender
