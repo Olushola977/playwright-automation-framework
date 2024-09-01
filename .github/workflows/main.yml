@@ -45,7 +45,7 @@ jobs:
           git checkout --orphan report-branch # Create a new branch without history
           git clean -fdx # remove gitignored files and folders
           git rm -rf . # remove all git tracked files and folders
-          git checkout main -- test-results/
+          git checkout main -- test-results/reports
 
           git add test-results
 
