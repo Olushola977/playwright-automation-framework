@@ -42,11 +42,9 @@ jobs:
           git add -A
           git commit -m "add test result"
 
-          git status
-
-          # git fetch origin
-          git checkout -b report-branch # Create a new branch without history
-
+          git checkout --orphan report-branch # Create a new branch without history
+          git clean -fdx # remove gitignored files and folders
+          git rm -rf . # remove all git tracked files and folders
           git checkout main -- test-results/
 
           git add test-results
