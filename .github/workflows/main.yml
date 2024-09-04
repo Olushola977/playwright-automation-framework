@@ -47,6 +47,8 @@ jobs:
           git rm -rf . # remove all git tracked files and folders
           git checkout main -- test-results/reports
 
+          mv test-results/reports/* . # Move the contents to the root
+
           git add test-results
 
           git commit -m 'Deploy test-results to new branch'
