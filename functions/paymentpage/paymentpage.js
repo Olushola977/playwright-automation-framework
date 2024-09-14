@@ -7,9 +7,7 @@ class PaymentPage {
 	}
 
 	selectCurrency = async (currency) => {
-		await this.locator.currencySelectField.waitFor({ visible: true })
 		await this.locator.currencySelectField.click()
-		await this.locator.currencyListDropdown.waitFor({ visible: true })
 		await this.locator.selectCurrency(currency).first().click()
 	}
 	enterAmount = async (amount) => {
