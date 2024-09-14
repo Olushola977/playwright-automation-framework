@@ -15,7 +15,9 @@ Given(
 			// const browser = await chromium.launch({ headless: false })
 			// this.context = await browser.newContext()
 			// this.page = await this.context.newPage()
-			await this.page.goto("https://sandbox.flutterwave.com/pay/p0ik4yuk5tv1")
+			await this.page.goto("https://sandbox.flutterwave.com/pay/p0ik4yuk5tv1", {
+				waitUntil: "networkidle",
+			})
 
 			this.paymentPage = new PaymentPage(this.page)
 			this.checkoutPage = new CheckoutPage(this.page)
