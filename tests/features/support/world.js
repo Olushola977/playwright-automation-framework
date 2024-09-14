@@ -9,7 +9,10 @@ class CustomWorld {
 	}
 
 	async openBrowser() {
-		this.browser = await chromium.launch()
+		this.browser = await chromium.launch({
+			headless: true,
+			args: ["--disable-gpu", "--no-sandbox"],
+		})
 		this.context = await this.browser.newContext()
 		this.page = await this.context.newPage()
 		return this.page
