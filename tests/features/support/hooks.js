@@ -9,7 +9,7 @@ const fs = require("fs")
 const path = require("path")
 
 //Set a timeout for each step
-setDefaultTimeout(60 * 1000)
+// setDefaultTimeout(60 * 1000)
 
 Before(async function () {
 	// Launch browser and create a new page
