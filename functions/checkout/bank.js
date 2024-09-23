@@ -1,11 +1,16 @@
-const BankPageLocators = require("../../locators/Bank")
+const CheckoutPageLocators = require("../../locators/CheckoutLocators")
 
 class BankPage {
 	constructor(page, amount) {
-		this.locator = new BankPageLocators(page, amount)
+		this.checkoutPageLocators = new CheckoutPageLocators(page)
+		this.checkoutPage = this.checkoutPageLocators.checkoutPage
+
+		this.bankContinueButton = this.checkoutPage.getByRole("button", {
+			name: `Proceed`,
+		})
 	}
 	continuePayment = async () => {
-		await this.locator.bankContinueButton.click()
+		await this.bankContinueButton.click()
 	}
 }
 

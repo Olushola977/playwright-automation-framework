@@ -1,10 +1,11 @@
 const { Given, When, Then } = require("@cucumber/cucumber")
-const { expect, chromium } = require("@playwright/test")
+const { expect } = require("@playwright/test")
 const PaymentPage = require("../../../functions/paymentpage/paymentpage")
 const CheckoutPage = require("../../../functions/checkout/checkout")
 const BankTransferPage = require("../../../functions/checkout/banktransfer")
 const CheckoutStatusPage = require("../../../functions/checkout/checkoutfinalstatus")
 const BankPage = require("../../../functions/checkout/bank")
+const trxData = require("../../../helpers/data/transactionData")
 
 //General method to be shared across scenarios
 Given(
@@ -12,10 +13,7 @@ Given(
 	{ timeout: 600 * 1000 },
 	async function () {
 		try {
-			// const browser = await chromium.launch({ headless: false })
-			// this.context = await browser.newContext()
-			// this.page = await this.context.newPage()
-			await this.page.goto("https://sandbox.flutterwave.com/pay/p0ik4yuk5tv1", {
+			await this.page.goto(`https://sandbox.flutterwave.com/pay/p0ik4yuk5tv1`, {
 				waitUntil: "networkidle",
 			})
 
@@ -34,16 +32,11 @@ When(
 	"The customer enters valid payment information and selects the {string} payment method",
 	{ timeout: 600 * 1000 },
 	async function (paymentMethod) {
-		const data = {
-			currency: "Nigeria NGN",
-			amount: "20000",
-			firstname: "Olushola",
-			lastname: "Adeyeye",
-			email: "olushola.adeyeye@flutterwavego.com",
-		}
 		console.log("Entering payment details...")
 
-		await this.paymentPage.fillPaymentDetailsandProceedtoCheckout(data)
+		await this.paymentPage.fillPaymentDetailsandProceedtoCheckout(
+			trxData.genericCheckoutData
+		)
 		await this.checkoutPage.selectPaymentMethod(paymentMethod)
 	}
 )
