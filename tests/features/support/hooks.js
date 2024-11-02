@@ -11,7 +11,7 @@ const path = require("path")
 //Set a timeout for each step
 // setDefaultTimeout(60 * 1000)
 
-Before(async function () {
+Before({ timeout: 500 * 1000 }, async function () {
 	// Launch browser and create a new page
 	this.page = await this.openBrowser()
 })

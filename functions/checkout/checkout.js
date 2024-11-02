@@ -30,15 +30,18 @@ class CheckoutPage {
 		await this.locator.enairaPaymentOption.click()
 	}
 	selectOpayPaymentOption = async () => {
+		// await this.locator.otherPaymentOptions.click({ force: true })
 		await this.locator.opayPaymentOption.click()
 	}
 	selectNqrPaymentOption = async () => {
+		// await this.locator.otherPaymentOptions.click()
 		await this.locator.nqrPaymentOption.click()
 	}
 	selectUssdPaymentOption = async () => {
 		await this.locator.ussdPaymentOption.click()
 	}
 	selectPaymentMethod = async (method) => {
+		await this.locator.otherPaymentOptions.click()
 		const paymentMethod = method.toLowerCase()
 		console.log("Checkout Method", paymentMethod)
 		switch (paymentMethod) {

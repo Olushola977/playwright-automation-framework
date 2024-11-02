@@ -6,6 +6,9 @@ class CheckoutPageLocators {
 		//loader
 		this.checkoutLoader = this.checkoutPage.locator(".loader-icon")
 		// .locator("div.testmode__info")
+		this.otherPaymentOptions = this.checkoutPage.getByLabel(
+			"View all payment options"
+		)
 		this.cardPaymentOption = this.checkoutPage
 			.getByRole("option", { name: "Card Payment" })
 			.locator("button")

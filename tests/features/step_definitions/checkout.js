@@ -6,6 +6,8 @@ const BankTransferPage = require("../../../functions/checkout/banktransfer")
 const CheckoutStatusPage = require("../../../functions/checkout/checkoutfinalstatus")
 const BankPage = require("../../../functions/checkout/bank")
 const trxData = require("../../../helpers/data/transactionData")
+const OpayPage = require("../../../functions/checkout/opay")
+const UssdPage = require("../../../functions/checkout/ussd")
 
 //General method to be shared across scenarios
 Given(
@@ -22,6 +24,8 @@ Given(
 			this.bankTransferPage = new BankTransferPage(this.page, 100)
 			this.bankPage = new BankPage(this.page, 200)
 			this.checkoutStatusPage = new CheckoutStatusPage(this.page)
+			this.opayPage = new OpayPage(this.page, 100)
+			this.ussdPage = new UssdPage(this.page)
 		} catch (error) {
 			console.error("Error launching browser or navigating to page:", error)
 			return
@@ -111,3 +115,57 @@ When(
 When("Customer clicks on the log in button", async function () {
 	await this.validationPage.getByRole("button", { name: "LOG IN" }).click()
 })
+
+/**
+ * Opay
+ */
+
+When("The customer clicks on the proceed button", async function () {
+	const [newPage] = await Promise.all([
+		this.context.waitForEvent("page"),
+		await this.opayPage.continuePayment(),
+	])
+	this.validationPage = newPage
+})
+
+When(
+	"The customer enters the phone number {string} and password {string}",
+	async function (phoneNumber, password) {
+		await this.validationPage
+			.getByPlaceholder("Enter phone number")
+			.first()
+			.fill(phoneNumber)
+		await this.validationPage
+			.getByPlaceholder("Enter 6-digits password")
+			.first()
+			.fill(password)
+		await this.validationPage.getByRole("button", { name: "Next" }).click()
+	}
+)
+
+When("The customer enters OTP {string}", async function (otp) {
+	await this.validationPage
+		.getByPlaceholder("Enter dummy otp 12345")
+		.first()
+		.fill(otp)
+	await this.validationPage.locator("#mocksubmit").click()
+})
+
+/**
+ * USSD
+ */
+When(
+	"The customer selects a bank {string} and click on the Pay button",
+	async function (bank) {
+		await this.ussdPage.selectBank(bank)
+		await this.ussdPage.continuePayment()
+	}
+)
+
+Then(
+	"Verify the bank ussd code is displayed and click on the I have completed this payment button",
+	async function () {
+		await expect(this.ussdPage.displayUssdCode()).toBeVisible()
+		await this.ussdPage.paymentCompleted()
+	}
+)
